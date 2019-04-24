@@ -1,0 +1,23 @@
+<div>
+  <app-loader [IsVisible]="false"></app-loader>
+
+  <h3>Users list</h3>
+
+  <div>
+    <input #usersFilter type="text" (change)="showUsers($event)" />
+  </div>
+
+  <hr style="width: 70%" />
+
+  <div *ngIf="!users || users.length === 0; else itemsCount">
+    <p>Empty users list</p>
+  </div>
+  <ng-template #itemsCount>
+    Count: {{ users.length }}
+    <ul class="panel panel-default" *ngFor="let user of users">
+      <li (click)="showUserDetails(user.login)" style="cursor: pointer;">
+        {{ user.login }}
+      </li>
+    </ul>
+  </ng-template>
+</div>

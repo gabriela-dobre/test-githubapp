@@ -1,0 +1,11 @@
+<div>
+  <app-loader [IsVisible]="false"></app-loader>
+    user details component
+    <br/>
+    <div *ngIf="!user; else userDetailsRegion">
+        <p>No user info</p>
+    </div>
+    <ng-template #userDetailsRegion>
+    {{user.name}}
+  </ng-template>
+</div>

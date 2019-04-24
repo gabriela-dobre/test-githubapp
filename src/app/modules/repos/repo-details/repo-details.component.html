@@ -1,0 +1,16 @@
+<div>
+  <div *ngIf="!repo; else repoDetailsRegion">
+    <p>No repo info</p>
+  </div>
+  <ng-template #repoDetailsRegion>
+    <h4>{{ repo.Name }}</h4>
+    <div>
+      Description
+      <input type="text" />
+    </div>
+    <div>
+      Private
+      <input type="checkbox" value="private" />
+    </div>
+  </ng-template>
+</div>

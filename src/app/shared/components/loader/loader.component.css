@@ -1,0 +1,56 @@
+.loader {
+      position: fixed;
+      text-align: center;
+      border: 8px solid #f3f3f3;
+      border-top: 5px solid #73879c;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      animation: spin 2s linear infinite;
+      z-index: 1000;
+      background-position: center;
+      margin: 0 auto;
+      top: 10rem;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+    
+    .loader2 {
+      position: fixed;
+      z-index: 100;
+      background-image: url('http://loadinggif.com/images/image-selection/3.gif');
+      background-color: #666;
+      opacity: 0.4;
+      background-repeat: no-repeat;
+      background-position: center;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      top: 0;
+    }
+    
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+    
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .overlay {
+      width: 100%;
+      opacity: .98;
+      height: 100%;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: rgb(191, 191, 191);
+      background-color: rgba(191, 191, 191, 0.9);
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+    
