@@ -19,10 +19,10 @@ export class GlobalErrorHandler implements ErrorHandler {
             message.summary = error.name;
 
             if (error instanceof HttpErrorResponse) {
-                  message.details = "There was an error with the API server";
+                  message.details = "There was an error with the API server - check console for details";
                   console.error("Handle Server Error", error);
             } else {
-                  message.details = "There was an unexpected error";
+                  message.details = "There was an unexpected error (client side) - check console for details";
                   console.error("Handle Client Error", error);
             }
 

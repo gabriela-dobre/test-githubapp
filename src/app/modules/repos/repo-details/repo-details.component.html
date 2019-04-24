@@ -6,11 +6,14 @@
     <h4>{{ repo.Name }}</h4>
     <div>
       Description
-      <input type="text" />
+      <input [(ngModel)]="repo.description" />
     </div>
     <div>
       Private
-      <input type="checkbox" value="private" />
+      <input type="checkbox" name="private" [(ngModel)]="repo.private" />
+    </div>
+    <div>
+      <input type="button" value="Edit" title="Edit" (click)="editRepo(repo)" />
     </div>
   </ng-template>
 </div>

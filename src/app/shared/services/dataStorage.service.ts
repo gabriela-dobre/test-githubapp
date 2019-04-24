@@ -7,6 +7,7 @@ import { UsersDTO } from '../models/UsersDTO';
 import { UserDetailsDTO } from '../models/UserDetailsDTO';
 import { ReposDTO } from '../models/ReposDTO';
 import { RepoDetailsDTO } from '../models/RepoDetailsDTO';
+import { EditRepoReq } from 'src/app/modules/repos/models/EditRepoReq';
 
 
 @Injectable()
@@ -40,6 +41,21 @@ export class DataStorageService {
 
   getRepoDetails(owner: string, repoName: string): Observable<RepoDetailsDTO> {
     return this.http.get<RepoDetailsDTO>(`${environment.apiUrl}/repos/${owner}/${repoName}`);
+  }
+
+  editRepoDetails(owner: string, repoName: string, repoDetails: EditRepoReq): Observable<RepoDetailsDTO> {
+    let body = { 
+      "name": repoName,
+      "description": repoDetails.description,
+      "private": repoDetails.private
+   };
+
+   var config = {
+    headers: { Accept: "application/json" }
+  };
+
+    return this.http.patch<RepoDetailsDTO>(`${environment.apiUrl}/repos/${owner}/${repoName}`, body, config);
+    
   }
 
 }

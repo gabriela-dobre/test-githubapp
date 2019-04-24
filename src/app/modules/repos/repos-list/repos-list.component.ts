@@ -4,33 +4,41 @@ import { MessagesService } from 'src/app/shared/services/messages.services';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { DataStorageService } from 'src/app/shared/services/dataStorage.service';
 import { ReposDTO } from 'src/app/shared/models/ReposDTO';
-import { RepoDetailsService } from '../services/repoDetails.service';
-import { RepoReq } from '../models/RepoReq';
+import { GetRepoDetailsService } from '../services/getRepoDetails.service';
+import { PartialRepoDetailsService } from '../services/partialRepoDetails.service';
+import { RepoDetailsDTO } from 'src/app/shared/models/RepoDetailsDTO';
 
 @Component({
   selector: 'app-repos-list',
   templateUrl: './repos-list.component.html',
   styleUrls: ['./repos-list.component.css'],
-  providers: [RepoDetailsService]
+  providers: [GetRepoDetailsService, PartialRepoDetailsService]
 })
 export class ReposListComponent extends BaseComponent implements OnInit {
 
   @ViewChild("reposFilter") reposFilter: ElementRef;
   repos: ReposDTO[];
-  
-  constructor(protected messagesService: MessagesService, 
+  selectedRepo: ReposDTO;
+  editedRepoName: string;
+
+  constructor(protected messagesService: MessagesService,
     protected loaderService: LoaderService,
     protected dataStorageService: DataStorageService,
-    protected repoDetailsService: RepoDetailsService) { 
-      super(messagesService, loaderService);
-    }
+    protected repoDetailsService: GetRepoDetailsService,
+    protected partialRepoDetailsService: PartialRepoDetailsService) {
+    super(messagesService, loaderService);
+  }
 
   ngOnInit() {
+    this.editedRepoName = this.partialRepoDetailsService.currentRepoValue == null ? '' : this.partialRepoDetailsService.currentRepoValue.name;
+
     this.getReposList('');
   }
 
-  showUsers(e) {
-    this.getReposList(e.target.value);
+  showUsers($event, name) {
+    setTimeout(() => {
+      this.getReposList(name);
+    }, 400);
   }
 
   getReposList(filter: string) {
@@ -38,11 +46,12 @@ export class ReposListComponent extends BaseComponent implements OnInit {
     this.dataStorageService.getReposList().subscribe(res => {
       this.repos = res.filter((repo: ReposDTO) => repo.name.includes(filter));
       this.loaderService.hide();
-    }); 
+    });
   }
 
   showRepoDetails(repo: ReposDTO) {
-    this.repoDetailsService.showDetails(<RepoReq>{owner: repo.owner.login, repoName: repo.name});
+    this.selectedRepo = repo;
+    this.editedRepoName = repo.name;
   }
 
 }

@@ -16,33 +16,30 @@ export class UsersListComponent extends BaseComponent implements OnInit {
   @ViewChild("usersFilter") usersFilter: ElementRef;
   users: UsersDTO[];
 
-  constructor(protected messagesService: MessagesService, 
+  constructor(protected messagesService: MessagesService,
     protected loaderService: LoaderService,
     protected dataStorageService: DataStorageService,
     public router: Router
-    ) { 
-      super(messagesService, loaderService);
-    }
+  ) {
+    super(messagesService, loaderService);
+  }
 
   ngOnInit() {
     this.getUsersList('');
   }
 
-  showUsers(e) {
-    this.getUsersList(e.target.value);
+  showUsers($event, name) {
+    setTimeout(() => {
+      this.getUsersList(name);
+    }, 400);
   }
 
   getUsersList(filter: string) {
     this.loaderService.show();
     this.dataStorageService.getUsersList().subscribe(res => {
-//       if(res["message"]) {
-// throw new Error(res["message"]);
-//       }
-// else {
       this.users = res.filter((user: UsersDTO) => user.login.includes(filter));
-//}
       this.loaderService.hide();
-    }); 
+    });
   }
 
   showUserDetails(username: string) {

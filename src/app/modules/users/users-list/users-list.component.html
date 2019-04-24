@@ -4,7 +4,7 @@
   <h3>Users list</h3>
 
   <div>
-    <input #usersFilter type="text" (change)="showUsers($event)" />
+    <input #usersFilter type="text" (keyup)="showUsers($event, usersFilter.value)" />
   </div>
 
   <hr style="width: 70%" />
@@ -14,8 +14,9 @@
   </div>
   <ng-template #itemsCount>
     Count: {{ users.length }}
-    <ul class="panel panel-default" *ngFor="let user of users">
-      <li (click)="showUserDetails(user.login)" style="cursor: pointer;">
+    <ul class="panel panel-default" >
+      <li *ngFor="let user of users" 
+        (click)="showUserDetails(user.login)" style="cursor: pointer;">
         {{ user.login }}
       </li>
     </ul>

@@ -6,19 +6,21 @@
   <div class="row">
     <div class="col-xs-6 col-6">
       <div>
-        <input #reposFilter type="text" (change)="showUsers($event)" />
+        <input #reposFilter type="text" (keyup)="showUsers($event, reposFilter.value)" />
       </div>
 
       <div *ngIf="!repos || repos.length === 0; else itemsCount">
         <p>Empty repos list</p>
       </div>
       <ng-template #itemsCount> Count: {{ repos.length }} </ng-template>
-      <ul class="panel panel-default" *ngFor="let repo of repos">
-        <li (click)="showRepoDetails(repo)" style="cursor: pointer;">{{ repo.name }}</li>
+      <ul class="panel panel-default" >
+        <li style="cursor: pointer;" *ngFor="let repo of repos"
+        (click)="showRepoDetails(repo)" 
+        [class.selected]="editedRepoName === repo.name">{{ repo.name }}</li>
       </ul>
     </div>
     <div class="col-xs-6 col-6">
-      <app-repo-details></app-repo-details>
+      <app-repo-details [repo]="selectedRepo"></app-repo-details>
     </div>
   </div>
 </div>
