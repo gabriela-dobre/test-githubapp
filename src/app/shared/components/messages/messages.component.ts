@@ -26,6 +26,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
         private cd: ChangeDetectorRef, private confirmationService: ConfirmationService) {}
 
     ngOnInit() {
+        //when a message is received, a popup is displayed
         this.addMessageSubscription = this.messagesService.addMessage$.subscribe(
             (data: Message) => {
                 this.message = data;

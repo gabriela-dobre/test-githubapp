@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { GetRepoDetailsService } from '../services/getRepoDetails.service';
-import { RepoDetailsDTO } from 'src/app/shared/models/RepoDetailsDTO';
+import { Component, OnInit, Input } from '@angular/core';
+import { RepoDetailsDTO } from 'src/app/modules/repos/models/RepoDetailsDTO';
 import { DataStorageService } from 'src/app/shared/services/dataStorage.service';
 import { EditRepoReq } from '../models/EditRepoReq';
 import { Router, NavigationStart } from '@angular/router';
@@ -13,49 +12,42 @@ import { MessageType } from 'src/app/shared/enums/messageType.enum';
   selector: 'app-repo-details',
   templateUrl: './repo-details.component.html',
   styleUrls: ['./repo-details.component.css'],
-  providers: [GetRepoDetailsService, PartialRepoDetailsService]
+  providers: [PartialRepoDetailsService]
 })
-export class RepoDetailsComponent implements OnInit, AfterViewInit {
+export class RepoDetailsComponent implements OnInit {
 
-  @Input() repo: RepoDetailsDTO;
-  
-  
+  @Input() selectedRepo: RepoDetailsDTO;
 
-  constructor(protected repoDetailsService: GetRepoDetailsService,
-    protected partialRepoDetailsService: PartialRepoDetailsService,
+  constructor(protected partialRepoDetailsService: PartialRepoDetailsService,
     protected dataStorageService: DataStorageService,
-    private router: Router, 
+    private router: Router,
     protected messagesService: MessagesService) { }
 
   ngOnInit() {
-    this.repoDetailsService.repoDetailsSubject$.subscribe(res => {
-      //iau owner si repo din obiect
-      this.dataStorageService.getRepoDetails(res.owner.login, res.name).subscribe(data => {
-        this.repo = data;
-      });
-    });
-
+    //checkes page url changes
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
-        this.partialRepoDetailsService.savePartialData(this.repo);
+        this.partialRepoDetailsService.savePartialData(this.selectedRepo);
       }
     });
 
-    this.repo = this.partialRepoDetailsService.currentRepoValue;
+    //get value for repo from storred value
+    this.selectedRepo = this.partialRepoDetailsService.currentRepoValue;
   }
 
-  ngAfterViewInit() {
-    
-  }
-
+  /**
+   * edits a repo details
+   * @param repo the repo object to be saved
+   */
   editRepo(repo: RepoDetailsDTO) {
-    var editRepo = new EditRepoReq();
+    let editRepo = new EditRepoReq();
     editRepo.description = repo.description;
+    editRepo.homepage = repo.homepage;
     editRepo.private = repo.private;
 
     this.dataStorageService.editRepoDetails(repo.owner.login, repo.name, editRepo)
       .subscribe(data => {
-        this.repo = data;
+        this.selectedRepo = data;
 
         //this.partialRepoDetailsService.savePartialData(null);
 
@@ -74,8 +66,5 @@ export class RepoDetailsComponent implements OnInit, AfterViewInit {
         });;
   }
 
-  ngOnDestroy() {
-    //this.subscription.unsubscribe();
-  }
 
 }

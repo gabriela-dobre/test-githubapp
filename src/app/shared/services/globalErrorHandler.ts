@@ -7,13 +7,10 @@ import { MessageType } from '../enums/messageType.enum';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-      constructor(
-            protected messagesService: MessagesService,
-            protected loaderService: LoaderService
-      ) { }
+      constructor(protected messagesService: MessagesService, protected loaderService: LoaderService) { }
 
       handleError(error: Error) {
-            let showAlertMsg = true;
+
             let message: Message = new Message();
             message.type = MessageType.ERROR;
             message.summary = error.name;
@@ -26,11 +23,8 @@ export class GlobalErrorHandler implements ErrorHandler {
                   console.error("Handle Client Error", error);
             }
 
-            if (showAlertMsg) {
-                  this.messagesService.onAddMessage(message);
-            }
+            this.messagesService.onAddMessage(message);
 
-            // log on the server
             this.loaderService.hide();
       }
 }

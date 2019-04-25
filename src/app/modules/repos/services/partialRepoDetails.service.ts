@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject, Observable } from 'rxjs';
-import { RepoDetailsDTO } from 'src/app/shared/models/RepoDetailsDTO';
+import { RepoDetailsDTO } from 'src/app/modules/repos/models/RepoDetailsDTO';
 
 
 @Injectable()
@@ -9,8 +9,8 @@ export class PartialRepoDetailsService {
     private currentRepoObject: Observable<RepoDetailsDTO>;
 
     constructor() { 
-        if(localStorage.getItem('currentRepo')){
-            this.currentRepoSubject = new BehaviorSubject<RepoDetailsDTO>(JSON.parse(localStorage.getItem('currentRepo')));
+        if(sessionStorage.getItem('currentRepo')){
+            this.currentRepoSubject = new BehaviorSubject<RepoDetailsDTO>(JSON.parse(sessionStorage.getItem('currentRepo')));
            }
            else{
                this.currentRepoSubject = new BehaviorSubject<RepoDetailsDTO>(null);
@@ -20,16 +20,12 @@ export class PartialRepoDetailsService {
     }
 
     savePartialData(repo: RepoDetailsDTO) {
-        localStorage.setItem('currentRepo', JSON.stringify(repo));
+        sessionStorage.setItem('currentRepo', JSON.stringify(repo));
         this.currentRepoSubject.next(repo);
     }
 
     public get currentRepoValue(): RepoDetailsDTO {
         return this.currentRepoSubject.value;
-    }
-
-    public get currentUser(): Observable<RepoDetailsDTO> {
-        return this.currentRepoObject;
     }
  
 }

@@ -10,21 +10,18 @@ import { environment } from 'src/environments/environment.prod';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor() { }
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-      let token = environment.token;
-      
-      const copiedReq = req.clone({
-        setHeaders: {
-          Authorization: `token ${token}`
-        }
-      });
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let token = environment.token;
 
-      return next.handle(copiedReq);
-    
+    const copiedReq = req.clone({
+      setHeaders: {
+        Authorization: `token ${token}`
+      }
+    });
+
+    return next.handle(copiedReq);
+
   }
 }

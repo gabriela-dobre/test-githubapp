@@ -1,26 +1,43 @@
 <div>
   <app-loader [IsVisible]="false"></app-loader>
 
-  <h3>Repos list</h3>
+  <div class="container">
+    <h3 class="moduleTitle">Repositories list</h3>
+    <br />
 
-  <div class="row">
-    <div class="col-xs-6 col-6">
-      <div>
-        <input #reposFilter type="text" (keyup)="showUsers($event, reposFilter.value)" />
+    <div class="row">
+      <div class="col-xs-6 col-6">
+        <div>
+          Filter by repo name
+          <input #reposFilter type="text" placeholder="filter repos" (keyup)="showRepos($event, reposFilter.value)" />
+        </div>
+        <br />
+
+        <div *ngIf="!repos || repos.length === 0; else itemsCount">
+          <p>Empty repos list</p>
+        </div>
+
+        <ng-template #itemsCount>
+          
+
+          <b>Count:</b> {{ repos.length }} <br />&nbsp;<br />
+
+          <div class="list-group">
+            <ul class="panel panel-default">
+              <li *ngFor="let repo of repos"
+                class="list-group-item" style="cursor: pointer;"
+                (click)="showRepoDetails(repo)" [class.selected]="editedRepoName === repo.name" >
+                {{ repo.name }}
+              </li>
+            </ul>
+          </div>
+        </ng-template>
       </div>
 
-      <div *ngIf="!repos || repos.length === 0; else itemsCount">
-        <p>Empty repos list</p>
+      <div class="col-xs-6 col-6">
+        <app-repo-details [selectedRepo]="selectedRepo"></app-repo-details>
       </div>
-      <ng-template #itemsCount> Count: {{ repos.length }} </ng-template>
-      <ul class="panel panel-default" >
-        <li style="cursor: pointer;" *ngFor="let repo of repos"
-        (click)="showRepoDetails(repo)" 
-        [class.selected]="editedRepoName === repo.name">{{ repo.name }}</li>
-      </ul>
-    </div>
-    <div class="col-xs-6 col-6">
-      <app-repo-details [repo]="selectedRepo"></app-repo-details>
+
     </div>
   </div>
 </div>

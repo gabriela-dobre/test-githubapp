@@ -1,24 +1,41 @@
 <div>
   <app-loader [IsVisible]="false"></app-loader>
 
-  <h3>Users list</h3>
+  <div class="container">
+    <h3 class="moduleTitle">Users list</h3>
+    <br />
 
-  <div>
-    <input #usersFilter type="text" (keyup)="showUsers($event, usersFilter.value)" />
+    <div>
+        Filter users by name
+        <input #usersFilter type="text" (keyup)="showUsers($event, usersFilter.value)" />
+      </div>
+      <br />
+      
+    <div *ngIf="!users || users.length === 0; else itemsCount">
+      <p>Empty users list</p>
+    </div>
+
+    
+
+    <ng-template #itemsCount>
+      
+
+      Count: {{ users.length }}<br />&nbsp;<br />
+
+      <div class="list-group">
+        <ul class="panel panel-default">
+          <li *ngFor="let user of users"
+            class="list-group-item" style="cursor: pointer;"
+            (click)="showUserDetails(user.login)" >
+            <img src="{{ user.avatar_url }}" style="width: 40px; height: 40px;" />
+            &nbsp;&nbsp;
+            {{ user.login }}
+          </li>
+        </ul>
+      </div>
+
+    </ng-template>
+
   </div>
 
-  <hr style="width: 70%" />
-
-  <div *ngIf="!users || users.length === 0; else itemsCount">
-    <p>Empty users list</p>
-  </div>
-  <ng-template #itemsCount>
-    Count: {{ users.length }}
-    <ul class="panel panel-default" >
-      <li *ngFor="let user of users" 
-        (click)="showUserDetails(user.login)" style="cursor: pointer;">
-        {{ user.login }}
-      </li>
-    </ul>
-  </ng-template>
 </div>

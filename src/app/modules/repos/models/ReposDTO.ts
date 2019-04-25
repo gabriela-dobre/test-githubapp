@@ -1,4 +1,5 @@
-import { UsersDTO } from './UsersDTO';
+import { UsersDTO } from '../../users/models/UsersDTO';
+
 
 export class ReposDTO {
       id: number;

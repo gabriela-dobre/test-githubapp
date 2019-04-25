@@ -13,6 +13,10 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * redirects to another page url
+   * @param page the specific page
+   */
   goTo(page: string) {
     this.router.navigate(['/'+ page]);
   }

@@ -1,0 +1,60 @@
+<app-loader [IsVisible]="false"></app-loader>
+
+<div class="container">
+
+   
+      
+
+      
+
+
+
+<h4> Header component</h4>
+  This component contains the title of the aplication
+
+<h4> Main page component </h4>
+  This component contains a short description of the aplication
+
+<h4> Menu component</h4>
+  This component contains the navigation links
+
+  <h4> PageNotFound component</h4>
+  This component contains a default html that is display when the users enters an unknown url
+
+  <h4>Users components</h4>
+  This section contains the master component (userslist) and the details component (userdetails). When a user is clicked, a new tab is opened in browser with the selected user information
+
+  <h4>Repos components</h4>
+  This section contains the master component (reposlist) and the details component (repodetails). When a repo is clicked, in the right side apears a region with the details to be edited. 
+
+  PartialRepoDetailsService manages the selected repo that is currently in editing mode. The repo is stored in a sessionstorage variable to mantain the data that is edited but not saved when changing url's.
+
+  <h4> Shared loader component</h4>
+  Is a component that displays a loading icon when the request takes longer.
+
+  <h4> Shared messages component</h4>
+  This component is used when you want to send notification to the user. A popup is display with a specific type (ERROR, WARNING, SUCCESS).
+
+  A PrimeNG component is used for the popup
+
+  <h4> Authentication interceptor</h4>
+  A token is sent with each request. The initial request is cloned and a token is added.
+
+  <h4> DataStorage service</h4>
+  A service that manages the GitHub API requests
+
+  <h4> GlobalError handler</h4>
+  A custom error handler that displays a message (message component) to the user when any unhandled error is catched.
+
+  <h4> Loader service</h4>
+  A service that notifies the loader component when to be shown in interface
+
+  <h4> Messages service</h4>
+  A service that notifies the messages componnet when to be shown in interface
+
+
+<h4>External libraries</h4>
+- https://getbootstrap.com/ <br/>
+- https://www.primefaces.org/primeng/#/ 
+
+</div>

@@ -1,5 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
+.headerCls {
+      background-color: #6a9b9b;
+      color: #eaeaea;
+    }
+    
+    .title {
+      font-size: 3vw;
+      align-content: center;
+    }
+    
+    .siteName {
+      text-align: center;
+    }
+
 .selected {
       background-color: bisque;
+}
+
+.moduleTitle {
+      color: #6a9b9b;
+}
+
+.ui-confirmdialog {
+      background-color: gray;
 }

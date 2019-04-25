@@ -1,5 +1,6 @@
-import { UsersDTO } from './UsersDTO';
+
 import { ReposDTO } from './ReposDTO';
+import { UsersDTO } from '../../users/models/UsersDTO';
 
 export class RepoDetailsDTO {
       id: number;
@@ -25,4 +26,5 @@ export class RepoDetailsDTO {
       created_at: Date;
       updated_at: Date;
       parent: ReposDTO;
+      homepage: string;
 }

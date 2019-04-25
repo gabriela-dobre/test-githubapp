@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainPageComponent } from './main-page/main-page.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UsersListComponent } from './modules/users/users-list/users-list.component';
 import { UserDetailsComponent } from './modules/users/user-details/user-details.component';
 import { ReposListComponent } from './modules/repos/repos-list/repos-list.component';
+import { MainPageComponent } from './modules/main-page/main-page.component';
+import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },

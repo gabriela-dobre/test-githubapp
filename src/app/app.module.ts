@@ -6,11 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { MessagesComponent } from './shared/components/messages/messages.component';
-import { MenuComponent } from './menu/menu.component';
-import { HeaderComponent } from './header/header.component';
 import { UsersListComponent } from './modules/users/users-list/users-list.component';
-import { MainPageComponent } from './main-page/main-page.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserDetailsComponent } from './modules/users/user-details/user-details.component';
 import { ReposListComponent } from './modules/repos/repos-list/repos-list.component';
 import { RepoDetailsComponent } from './modules/repos/repo-details/repo-details.component';
@@ -22,6 +18,11 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { GlobalErrorHandler } from './shared/services/globalErrorHandler';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './shared/services/auth.interceptor';
+import { MenuComponent } from './modules/menu/menu.component';
+import { HeaderComponent } from './modules/header/header.component';
+import { MainPageComponent } from './modules/main-page/main-page.component';
+import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.component';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AuthInterceptor } from './shared/services/auth.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
     ConfirmDialogModule,
-    FormsModule
+    FormsModule,
+    ButtonModule
   ],
   providers: [
     MessagesService,

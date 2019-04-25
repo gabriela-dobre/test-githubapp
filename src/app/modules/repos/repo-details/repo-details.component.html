@@ -1,19 +1,34 @@
 <div>
-  <div *ngIf="!repo; else repoDetailsRegion">
-    <p>No repo info</p>
+  <div *ngIf="!selectedRepo; else repoDetailsRegion">
+    <p>No repo info or no repo selected</p>
   </div>
+  
   <ng-template #repoDetailsRegion>
-    <h4>{{ repo.Name }}</h4>
+    <h4>{{ selectedRepo.name | uppercase }} details</h4>
+    <br/>
+
+    <div class="input-group flex-nowrap">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="addon-wrapping">Description</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="selectedRepo.description" >
+      </div>
+
+    <div class="input-group flex-nowrap">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="addon-wrapping">Homepage</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="selectedRepo.homepage" >
+      </div>
+     
     <div>
-      Description
-      <input [(ngModel)]="repo.description" />
+      <b>Private</b>
+      <input type="checkbox" name="private" [(ngModel)]="selectedRepo.private" />
     </div>
+    <br/>
+
     <div>
-      Private
-      <input type="checkbox" name="private" [(ngModel)]="repo.private" />
-    </div>
-    <div>
-      <input type="button" value="Edit" title="Edit" (click)="editRepo(repo)" />
+      <button type="button" class="btn btn-primary" (click)="editRepo(selectedRepo)" >Edit</button>
     </div>
   </ng-template>
 </div>

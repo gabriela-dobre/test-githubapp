@@ -1,11 +1,21 @@
 <div>
   <app-loader [IsVisible]="false"></app-loader>
-    user details component
-    <br/>
+    
+  <div class="container">
     <div *ngIf="!user; else userDetailsRegion">
         <p>No user info</p>
     </div>
+
     <ng-template #userDetailsRegion>
-    {{user.name}}
-  </ng-template>
+      <div>
+        <img src="{{user.avatar_url}}" style="width: 60px; height: 60px;">
+          <b><u>{{user.name | uppercase }}</u></b>
+      </div>
+      <div><b>Company:</b> {{user.company}}</div>
+      <div><b>Url:</b> {{user.url}}</div>
+      <div><b>Blog:</b> {{user.blog}}</div>
+      <div><b>Created at:</b> {{user.created_at | date}}</div>
+    </ng-template>
+
+</div>
 </div>
