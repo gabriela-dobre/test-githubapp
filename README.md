@@ -32,9 +32,9 @@
  - https://www.primefaces.org/primeng/#/ - controale custom
 
 ## IMPORTANT NOTICE
-  To make requests in a secure and a continuos method, you must generate a token that will be send on each request
+  To make requests in a secure and a continuos method, you must generate a token that will be send on each request. This token must be placed in the environment file (/environments/environment.ts - dev or /environments/environment.prod.ts - production). 
 
-  For editing a repo, you must be the owner of that repo and you must have access rights in the specified token
+  For editing a repo, you must be the owner of that repo and you must have access rights for the specified token
 
 ## Header component
   This component contains the title of the aplication
